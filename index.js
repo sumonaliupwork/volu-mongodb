@@ -40,9 +40,15 @@ async function run() {
         app.post('/users', async (req, res) => {
             const user = req.body;
             const result = await userCollection.insertOne(user);
-            console.log(result);
             res.json(result);
         });
+        // GET API
+        app.get('/users', async (req, res) => {
+            const user = userCollection.find({});
+            const result = await user.toArray();
+            res.send(result);
+        });
+
     }
     finally {
         // await client.close();
